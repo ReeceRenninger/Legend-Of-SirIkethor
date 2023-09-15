@@ -9,6 +9,7 @@ class Game:
     pygame.init()
     self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
     self.clock = pygame.time.Clock()
+    pygame.display.set_caption('Adventure of Sir Ikethor') # changes the caption of the pygame window
   
   def run(self):
     while True:
