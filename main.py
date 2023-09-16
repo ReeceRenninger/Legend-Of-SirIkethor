@@ -1,6 +1,7 @@
 import pygame, sys
 from settings import *
 from debug import debug
+from level import Level
 
 class Game:
   def __init__(self):
@@ -11,6 +12,7 @@ class Game:
     self.clock = pygame.time.Clock()
     pygame.display.set_caption('Adventure of Sir Ikethor') # changes the caption of the pygame window
   
+    self.level = Level() # create a level object
   def run(self):
     while True:
       for event in pygame.event.get():
@@ -20,6 +22,7 @@ class Game:
 
       self.screen.fill('black') # generate a screen of just black
       # debug('hello :)') # debug the string 'hello :)' on the pygame screen, this can be used for testing in the future
+      self.level.run() # run the level
       pygame.display.update() # update the display
       self.clock.tick(FPS) # set the FPS to 60 (FPS is a constant in settings.py)
 
