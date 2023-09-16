@@ -4,6 +4,10 @@
 
 - First attempt at making a game with pygame library.  
 
+## Tools
+
+- background remover for images: [remove.bg](https://www.remove.bg/)
+
 ## Art
 
 - rock.png was used from [OpenGameArt.org](https://opengameart.org/content/rock-0)
