@@ -13,6 +13,7 @@ class Game:
     pygame.display.set_caption('Adventure of Sir Ikethor') # changes the caption of the pygame window
   
     self.level = Level() # create a level object
+    
   def run(self):
     while True:
       for event in pygame.event.get():
