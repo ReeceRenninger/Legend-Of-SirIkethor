@@ -25,7 +25,7 @@ class Level:
           if col == 'x': # if the value of the column is 'x' then create a tile at that position
             Tile((x, y), [self.visible_sprites, self.obstacle_sprites]) # generating rocks, visible and obstacle
           if col == 'p': # if the value of the column is 'p' then create player tile at that position
-            self.player = Player((x, y), [self.visible_sprites]) #generating player
+            self.player = Player((x, y), [self.visible_sprites], self.obstacle_sprites) # generating player
 
   def run(self):
     #update and draw the game
