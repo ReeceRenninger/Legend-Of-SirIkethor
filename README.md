@@ -11,4 +11,4 @@
 ## Art
 
 - rock.png was used from [OpenGameArt.org](https://opengameart.org/content/rock-0)
-- player.png was used from [gameart2d.com](https://www.gameart2d.com/the-knight-free-sprites.html)
+- player.png was used from [craftpix.net](https://craftpix.net/freebies/free-knight-character-sprites-pixel-art/?num=1&count=71&sq=knight&pos=4)
