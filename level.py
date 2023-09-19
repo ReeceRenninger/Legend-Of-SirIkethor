@@ -11,7 +11,7 @@ class Level:
     self.display_surface = pygame.display.get_surface()
 
     # sprite group setup
-    self.visible_sprites = pygame.sprite.Group()
+    self.visible_sprites = CameraGroup()
     self.obstacle_sprites = pygame.sprite.Group()
 
     # sprite setup
@@ -29,7 +29,25 @@ class Level:
 
   def run(self):
     #update and draw the game
-    # pass # not doing anything yet
-    self.visible_sprites.draw(self.display_surface) # draw the visible sprites to the display surface
+   
+    self.visible_sprites.custom_draw(self.player) # custom draw does the offset for the camera
     self.visible_sprites.update() # update the visible sprites
-    debug(self.player.direction)
+
+    debug(self.player.direction) #! remove before release
+
+class CameraGroup(pygame.sprite.Group):
+  def __init__(self):
+    #setup the camera
+    super().__init__()
+    self.display_surface = pygame.display.get_surface() # get the display surface
+    self.half_width = self.display_surface.get_width() // 2 # get the half width of the display surface
+    self.half_height = self.display_surface.get_height() // 2 # get the half height of the display surface
+    self.offset = pygame.math.Vector2(0, 0) # set the offset to 0, 0 for sprite overlap offset
+
+  def custom_draw(self, player):
+    # get offset
+    self.offset.x = player.rect.centerx - self.half_width # player.rect.centerx is the center of the player sprite on x
+    self.offset.y = player.rect.centery - self.half_height # player.rect.centery is the center of the player sprite on y
+    for sprite in self.sprites(): # loop through all the sprites in the group
+      offset_sprite_pos = sprite.rect.topleft - self.offset
+      self.display_surface.blit(sprite.image, offset_sprite_pos) # draw the sprite to the display surface with offset
