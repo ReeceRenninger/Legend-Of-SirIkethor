@@ -5,8 +5,10 @@ class Player(pygame.sprite.Sprite): #! very important to inherit from pygame.spr
     def __init__(self, position, groups, obstacle_sprites):
         super().__init__(groups) # initialize the sprite groups
         self.image = pygame.image.load('graphics/ikeKnight.png').convert_alpha() # load the image
-        
+
         self.rect = self.image.get_rect(topleft = position)
+
+        self.hitbox = self.rect.inflate(-15, -30) # changing the rect of player to give depth when traversing obstacles #! may need to change x to 0 for collision issue later on
 
         self.direction = pygame.math.Vector2(0, 0) # create a vector for the direction of the player, this is what we can influence with keystrokes to move the player
         self.speed = 5 # set the speed of the player to 5
@@ -34,29 +36,29 @@ class Player(pygame.sprite.Sprite): #! very important to inherit from pygame.spr
     def move(self, speed):
         if self.direction.magnitude() != 0: # vector was set to 0 if no key was pressed, so if the magnitude is not 0, normalize the vector
             self.direction = self.direction.normalize() # normalize the vector by dividing the vector by the magnitude, this helps keep movement fluid if 2 keys are pressed at the same time
-            self.rect.x += self.direction.x * speed # move the player rect by the direction * the speed
+            self.hitbox.x += self.direction.x * speed # move the player hitbox by the direction * the speed
             self.collision("horizontal") # check for horizontal collision
-            self.rect.y += self.direction.y * speed # move the player rect by the direction * the speed
+            self.hitbox.y += self.direction.y * speed # move the player hitbox by the direction * the speed
             self.collision("vertical") # check for vertical collision
-
-        # self.rect.center += self.direction * speed # move the player rect by the direction * the speed
+            self.rect.center = self.hitbox.center # set the center of the player rect to the center of the player hitbox
+        
 
     def collision(self, direction):
         if direction == "horizontal":
             for sprite in self.obstacle_sprites:
-                if sprite.rect.colliderect(self.rect):
+                if sprite.hitbox.colliderect(self.hitbox):
                     if self.direction.x > 0: # moving right
-                        self.rect.right = sprite.rect.left # set the right side of the player rect to the left side of the obstacle rect
+                        self.hitbox.right = sprite.hitbox.left # set the right side of the player hitbox to the left side of the obstacle hitbox
                     if self.direction.x < 0: # moving left
-                        self.rect.left = sprite.rect.right # set the left side of the player rect to the right side of the obstacle rect
+                        self.hitbox.left = sprite.hitbox.right # set the left side of the player hitbox to the right side of the obstacle rect
         
         if direction == "vertical":
                 for sprite in self.obstacle_sprites:
-                    if sprite.rect.colliderect(self.rect):
+                    if sprite.hitbox.colliderect(self.hitbox):
                         if self.direction.y > 0: # moving down
-                            self.rect.bottom = sprite.rect.top # set the bottom side of the player rect to the top side of the obstacle rect
+                            self.hitbox.bottom = sprite.hitbox.top # set the bottom side of the player hitbox to the top side of the obstacle rect
                         if self.direction.y < 0: # moving up
-                            self.rect.top = sprite.rect.bottom # set the top side of the player rect to the bottom side of the obstacle rect
+                            self.hitbox.top = sprite.hitbox.bottom # set the top side of the player hitbox to the bottom side of the obstacle rect
     def update(self):
         self.input()
         self.move(self.speed) # move the player by the speed
