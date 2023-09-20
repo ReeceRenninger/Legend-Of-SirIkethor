@@ -48,6 +48,7 @@ class CameraGroup(pygame.sprite.Group):
     # get offset
     self.offset.x = player.rect.centerx - self.half_width # player.rect.centerx is the center of the player sprite on x
     self.offset.y = player.rect.centery - self.half_height # player.rect.centery is the center of the player sprite on y
-    for sprite in self.sprites(): # loop through all the sprites in the group
+   
+    for sprite in sorted(self.sprites(), key = lambda sprite: sprite.rect.centery): # loop through all the sprites in the group, sorted by the y position of the sprite
       offset_sprite_pos = sprite.rect.topleft - self.offset
       self.display_surface.blit(sprite.image, offset_sprite_pos) # draw the sprite to the display surface with offset
