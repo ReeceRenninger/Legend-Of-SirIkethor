@@ -4,13 +4,14 @@ from settings import *
 class Player(pygame.sprite.Sprite): #! very important to inherit from pygame.sprite.Sprite
     def __init__(self, position, groups, obstacle_sprites):
         super().__init__(groups) # initialize the sprite groups
-        self.image = pygame.image.load('graphics/ikeKnight.png').convert_alpha() # load the image
+        self.image = pygame.image.load('assets/ikeKnight.png').convert_alpha() # load the image
 
         self.rect = self.image.get_rect(topleft = position)
 
         self.hitbox = self.rect.inflate(-15, -30) # changing the rect of player to give depth when traversing obstacles #! may need to change x to 0 for collision issue later on
 
         self.direction = pygame.math.Vector2(0, 0) # create a vector for the direction of the player, this is what we can influence with keystrokes to move the player
+        
         self.speed = 5 # set the speed of the player to 5
 
         self.obstacle_sprites = obstacle_sprites
