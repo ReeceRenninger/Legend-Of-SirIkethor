@@ -18,15 +18,18 @@ class Level:
     self.create_map()
 
   def create_map(self):
-    for row_index, row in enumerate(WORLD_MAP): # enumerate gives us the index and the value of the item in the list
-      for col_index, col in enumerate(row): 
-          x = col_index * TILESIZE # x position is the column index * the tilesize
-          y = row_index * TILESIZE # y position is the row index * the tilesize
-          if col == 'x': # if the value of the column is 'x' then create a tile at that position
-            Tile((x, y), [self.visible_sprites, self.obstacle_sprites]) # generating rocks, visible and obstacle
-          if col == 'p': # if the value of the column is 'p' then create player tile at that position
-            self.player = Player((x, y), [self.visible_sprites], self.obstacle_sprites) # generating player
-
+      #!! this previous code was for generating the map from my settings.py file with the simple rock png and player png
+    # for row_index, row in enumerate(WORLD_MAP): # enumerate gives us the index and the value of the item in the list
+    #   for col_index, col in enumerate(row): 
+    #       x = col_index * TILESIZE # x position is the column index * the tilesize
+    #       y = row_index * TILESIZE # y position is the row index * the tilesize
+    #       if col == 'x': # if the value of the column is 'x' then create a tile at that position
+    #         Tile((x, y), [self.visible_sprites, self.obstacle_sprites]) # generating rocks, visible and obstacle
+    #       if col == 'p': # if the value of the column is 'p' then create player tile at that position
+    #         self.player = Player((x, y), [self.visible_sprites], self.obstacle_sprites) # generating player
+     #** Creating a new player position with the actual map
+      self.player = Player((1275, 1950), [self.visible_sprites], self.obstacle_sprites) # generating player
+      
   def run(self):
     #update and draw the game
    
