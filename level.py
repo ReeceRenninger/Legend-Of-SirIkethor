@@ -18,6 +18,9 @@ class Level:
     self.create_map()
 
   def create_map(self):
+      layout = {
+          'boundary' : import_csv_layout('assets/map/map_FloorBlocks.csv')
+      }
       #!! this previous code was for generating the map from my settings.py file with the simple rock png and player png
     # for row_index, row in enumerate(WORLD_MAP): # enumerate gives us the index and the value of the item in the list
     #   for col_index, col in enumerate(row): 
@@ -29,7 +32,7 @@ class Level:
     #         self.player = Player((x, y), [self.visible_sprites], self.obstacle_sprites) # generating player
      #** Creating a new player position with the actual map
       self.player = Player((1275, 1950), [self.visible_sprites], self.obstacle_sprites) # generating player
-      
+
   def run(self):
     #update and draw the game
    
