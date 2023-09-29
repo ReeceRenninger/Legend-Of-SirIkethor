@@ -22,7 +22,7 @@ class Level:
     layout = {
           'boundary' : import_csv_layout('assets/map/map_FloorBlocks.csv')
     }
-      #!! this previous code was for generating the map from my settings.py file with the simple rock png and player png
+    #!! indentation is key here, if the indentation is off then the code will not work properly with reading the floor blocks csv file
     for style, layout in layout.items(): # style is representative of the boundary while layout is representative of the map_FloorBlocks.csv
       for row_index, row in enumerate(layout): # enumerate gives us the index and the value of the item in the list
           for col_index, col in enumerate(row): 
