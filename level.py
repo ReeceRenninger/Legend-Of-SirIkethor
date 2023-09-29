@@ -3,6 +3,7 @@ from settings import *
 from tile import Tile
 from player import Player
 from debug import debug
+from helper import *
 
 class Level:
   def __init__(self):
@@ -18,21 +19,27 @@ class Level:
     self.create_map()
 
   def create_map(self):
-      #!! this previous code was for generating the map from my settings.py file with the simple rock png and player png
-    # for row_index, row in enumerate(WORLD_MAP): # enumerate gives us the index and the value of the item in the list
-    #   for col_index, col in enumerate(row): 
-    #       x = col_index * TILESIZE # x position is the column index * the tilesize
-    #       y = row_index * TILESIZE # y position is the row index * the tilesize
+    layout = {
+          'boundary' : import_csv_layout('assets/map/map_FloorBlocks.csv')
+    }
+    #!! indentation is key here, if the indentation is off then the code will not work properly with reading the floor blocks csv file
+    for style, layout in layout.items(): # style is representative of the boundary while layout is representative of the map_FloorBlocks.csv
+      for row_index, row in enumerate(layout): # enumerate gives us the index and the value of the item in the list
+          for col_index, col in enumerate(row): 
+              if col != '-1': # if the value of the column is not -1 then create a tile at that position, csv file is outputting -1 for empty spaces
+                  x = col_index * TILESIZE # x position is the column index * the tilesize
+                  y = row_index * TILESIZE # y position is the row index * the tilesize
+                  if style == 'boundary':
+                      Tile((x, y), [self.visible_sprites, self.obstacle_sprites], 'invisible') #position is the x,y position, groups is the visible and obstacle sprites, sprite_type is invisible. These are tile parameters from tile.py modified for the boundary
     #       if col == 'x': # if the value of the column is 'x' then create a tile at that position
     #         Tile((x, y), [self.visible_sprites, self.obstacle_sprites]) # generating rocks, visible and obstacle
     #       if col == 'p': # if the value of the column is 'p' then create player tile at that position
     #         self.player = Player((x, y), [self.visible_sprites], self.obstacle_sprites) # generating player
      #** Creating a new player position with the actual map
       self.player = Player((1275, 1950), [self.visible_sprites], self.obstacle_sprites) # generating player
-      
+
   def run(self):
     #update and draw the game
-   
     self.visible_sprites.custom_draw(self.player) # custom draw does the offset for the camera
     self.visible_sprites.update() # update the visible sprites
 
