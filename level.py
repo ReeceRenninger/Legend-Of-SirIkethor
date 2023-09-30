@@ -30,7 +30,7 @@ class Level:
                   x = col_index * TILESIZE # x position is the column index * the tilesize
                   y = row_index * TILESIZE # y position is the row index * the tilesize
                   if style == 'boundary':
-                      Tile((x, y), [self.visible_sprites, self.obstacle_sprites], 'invisible') #position is the x,y position, groups is the visible and obstacle sprites, sprite_type is invisible. These are tile parameters from tile.py modified for the boundary
+                      Tile((x, y), [self.obstacle_sprites], 'invisible') #position is the x,y position, groups is the visible and obstacle sprites, sprite_type is invisible. These are tile parameters from tile.py modified for the boundary
     #       if col == 'x': # if the value of the column is 'x' then create a tile at that position
     #         Tile((x, y), [self.visible_sprites, self.obstacle_sprites]) # generating rocks, visible and obstacle
     #       if col == 'p': # if the value of the column is 'p' then create player tile at that position
