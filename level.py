@@ -46,16 +46,15 @@ class Level:
                       Tile((x, y), [self.visible_sprites, self.obstacle_sprites], 'grass', random_grass) # position is the x,y position, groups is the visible sprites, sprite_type is grass, surface is the random grass tile we chose from the graphics dictionary
 #! object images are not being placed in correct positions, need to fix this, getting snow items in desert area, could be because of the CSV file 
                   if style == 'object':
-                     # create our object tiles
-                     surf = graphics['objects'][int(col)] # get the surface from the graphics dictionary, col is the value of the column, we need to convert it to an int because it is a string
-                     Tile((x, y), [self.visible_sprites, self.obstacle_sprites], 'object', surf) # position is the x,y position, groups is the visible sprites, sprite_type is object, surface is the surface we got from the graphics dictionary
-    #       if col == 'x': # if the value of the column is 'x' then create a tile at that position
-    #         Tile((x, y), [self.visible_sprites, self.obstacle_sprites]) # generating rocks, visible and obstacle
-    #       if col == 'p': # if the value of the column is 'p' then create player tile at that position
-    #         self.player = Player((x, y), [self.visible_sprites], self.obstacle_sprites) # generating player
-     #** Creating a new player position with the actual map
-      self.player = Player((1275, 1950), [self.visible_sprites], self.obstacle_sprites) # generating player at a specific position
-
+                      surf = graphics['objects'][int(col)] # get the surface from the graphics dictionary, col is the value of the column, int(col) is the index of the surface in the graphics dictionary
+                      Tile((x, y), [self.visible_sprites, self.obstacle_sprites], 'object', surf) # position is the x,y position, groups is the visible sprites, sprite_type is object, surface is the surface we got from the graphics dictionary
+# if col == 'x': # if the value of the column is 'x' then create a tile at that position
+#   Tile((x, y), [self.visible_sprites, self.obstacle_sprites]) # generating rocks, visible and obstacle
+# if col == 'p': # if the value of the column is 'p' then create player tile at that position
+#   self.player = Player((x, y), [self.visible_sprites], self.obstacle_sprites) # generating player
+#** Creating a new player position with the actual map
+    self.player = Player((2000, 1430), [self.visible_sprites], self.obstacle_sprites) # generating player at a specific position
+                        # 1275, 1950 lower left path location
   def run(self):
     #update and draw the game
     self.visible_sprites.custom_draw(self.player) # custom draw does the offset for the camera
