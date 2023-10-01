@@ -19,7 +19,7 @@ def import_folder(path):
         for image in img_files: # iterate through the image files
             full_path = path + '/' + image # create the full path to the image to easily import it
             image_surf = pygame.image.load(full_path).convert_alpha() # load the image and convert it to alpha from the docs
-            surface_list.append(image_surf)
+            surface_list.append(image_surf) # append the image to the surface list
     return surface_list
 
 # import_folder('assets/graphics/grass') # test to see if the folder is being read properly

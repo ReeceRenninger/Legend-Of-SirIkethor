@@ -4,6 +4,7 @@ from tile import Tile
 from player import Player
 from debug import debug
 from helper import *
+from random import choice
 
 class Level:
   def __init__(self):
@@ -21,9 +22,14 @@ class Level:
   def create_map(self):
     layout = {
           'boundary' : import_csv_layout('assets/map/map_FloorBlocks.csv'), # border of map to prevent player from going into water
-          'grass': import_csv_layout('assets/map/map_Grass.csv'), # grass tiles to be added onto the map
-          'object': import_csv_layout('assets/map/map_Object.csv'), # rocks / trees / objects to be added to the map
+          'grass': import_csv_layout('assets/map/map_Grass.csv'), # grass tiles location to be added onto the map
+          'object': import_csv_layout('assets/map/map_Objects.csv'), # rocks / trees / objects location to be added to the map
     }
+    graphics = {
+       'grass': import_folder('assets/graphics/grass'), # grass tiles to be added onto the map
+       'objects': import_folder('assets/graphics/objects'), # rocks / trees / objects to be added to the map
+    }
+    # print(graphics) # testing my file path from import_folder function in helper.py
     #!! indentation is key here, if the indentation is off then the code will not work properly with reading the floor blocks csv file
     for style, layout in layout.items(): # style is representative of the boundary while layout is representative of the map_FloorBlocks.csv
       for row_index, row in enumerate(layout): # enumerate gives us the index and the value of the item in the list
@@ -35,10 +41,12 @@ class Level:
                       Tile((x, y), [self.obstacle_sprites], 'invisible') #position is the x,y position, groups is the visible and obstacle sprites, sprite_type is invisible. These are tile parameters from tile.py modified for the boundary
                   if style == 'grass':
                      # create our grass
-                      pass 
+                      random_grass = choice(graphics['grass']) # randomly choose a grass tile from the graphics dictionary
+                      Tile((x, y), [self.visible_sprites, self.obstacle_sprites], 'grass', random_grass) # position is the x,y position, groups is the visible sprites, sprite_type is grass, surface is the random grass tile we chose from the graphics dictionary
                   if style == 'object':
                      # create our object tiles
-                     pass
+                     surface = graphics['objects'][int(col)] # get the surface from the graphics dictionary, col is the value of the column, we need to convert it to an int because it is a string
+                     Tile((x, y), [self.visible_sprites, self.obstacle_sprites], 'object', surface) # position is the x,y position, groups is the visible sprites, sprite_type is object, surface is the surface we got from the graphics dictionary
     #       if col == 'x': # if the value of the column is 'x' then create a tile at that position
     #         Tile((x, y), [self.visible_sprites, self.obstacle_sprites]) # generating rocks, visible and obstacle
     #       if col == 'p': # if the value of the column is 'p' then create player tile at that position
