@@ -20,7 +20,9 @@ class Level:
 
   def create_map(self):
     layout = {
-          'boundary' : import_csv_layout('assets/map/map_FloorBlocks.csv')
+          'boundary' : import_csv_layout('assets/map/map_FloorBlocks.csv'), # border of map to prevent player from going into water
+          'grass': import_csv_layout('assets/map/map_Grass.csv'), # grass tiles to be added onto the map
+          'object': import_csv_layout('assets/map/map_Object.csv'), # rocks / trees / objects to be added to the map
     }
     #!! indentation is key here, if the indentation is off then the code will not work properly with reading the floor blocks csv file
     for style, layout in layout.items(): # style is representative of the boundary while layout is representative of the map_FloorBlocks.csv
@@ -31,6 +33,12 @@ class Level:
                   y = row_index * TILESIZE # y position is the row index * the tilesize
                   if style == 'boundary':
                       Tile((x, y), [self.obstacle_sprites], 'invisible') #position is the x,y position, groups is the visible and obstacle sprites, sprite_type is invisible. These are tile parameters from tile.py modified for the boundary
+                  if style == 'grass':
+                     # create our grass
+                      pass 
+                  if style == 'object':
+                     # create our object tiles
+                     pass
     #       if col == 'x': # if the value of the column is 'x' then create a tile at that position
     #         Tile((x, y), [self.visible_sprites, self.obstacle_sprites]) # generating rocks, visible and obstacle
     #       if col == 'p': # if the value of the column is 'p' then create player tile at that position
