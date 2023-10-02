@@ -70,15 +70,17 @@ class CameraGroup(pygame.sprite.Group):
     self.half_width = self.display_surface.get_width() // 2 # get the half width of the display surface
     self.half_height = self.display_surface.get_height() // 2 # get the half height of the display surface
     self.offset = pygame.math.Vector2(0, 0) # set the offset to 0, 0 for sprite overlap offset
+    
 
     # create the floor from the bottom of the screen using tile image
     self.floor_surface = pygame.image.load('assets/ground/ground.png').convert() # load the tile image
     self.floor_rect = self.floor_surface.get_rect(topleft = (0,0))
 
   def custom_draw(self, player):
+
     # get offset
-    self.offset.x = player.rect.centerx - self.half_width # player.rect.centerx is the center of the player sprite on x
-    self.offset.y = player.rect.centery - self.half_height # player.rect.centery is the center of the player sprite on y
+    self.offset.x = player.rect.centerx - self.display_surface.get_width() // 2 # player.rect.centerx is the center of the player sprite on x
+    self.offset.y = player.rect.centery - self.display_surface.get_height() // 2 # player.rect.centery is the center of the player sprite on y
    
     # draw the floor
     floor_offset_pos = self.floor_rect.topleft - self.offset # get the offset position of the floor
@@ -87,3 +89,4 @@ class CameraGroup(pygame.sprite.Group):
     for sprite in sorted(self.sprites(), key = lambda sprite: sprite.rect.centery): # loop through all the sprites in the group, sorted by the y position of the sprite
       offset_sprite_pos = sprite.rect.topleft - self.offset
       self.display_surface.blit(sprite.image, offset_sprite_pos) # draw the sprite to the display surface with offset
+  
