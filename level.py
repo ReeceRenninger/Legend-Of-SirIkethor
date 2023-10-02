@@ -78,7 +78,7 @@ class CameraGroup(pygame.sprite.Group):
 
   def custom_draw(self, player):
 
-    # get offset
+    # get offset #! updated with Ozzie during interview to have dynamic offset as screen changes
     self.offset.x = player.rect.centerx - self.display_surface.get_width() // 2 # player.rect.centerx is the center of the player sprite on x
     self.offset.y = player.rect.centery - self.display_surface.get_height() // 2 # player.rect.centery is the center of the player sprite on y
    
