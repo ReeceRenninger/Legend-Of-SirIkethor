@@ -4,10 +4,10 @@ HEIGHT   = 720
 FPS      = 60
 TILESIZE = 64
 
+#! Original map that used x as rocks and p as player, this was used for testing collision and movement in beginning stages of the project
 # x = wall or object that can't be passed through
 # p = player
 # ' ' = empty space that can be traversed by player
-
 # WORLD_MAP = [
 # ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
 # ['x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', 'x'],
