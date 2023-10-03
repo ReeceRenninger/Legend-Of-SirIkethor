@@ -8,16 +8,16 @@ class Game:
 
     # general setup of pygame off docs at https://www.pygame.org/docs/
     pygame.init()
-    self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
-    self.clock = pygame.time.Clock()
+    self.screen = pygame.display.set_mode((WIDTH, HEIGHT)) # set the screen size to the width and height constants in settings.py
+    self.clock = pygame.time.Clock() # create a clock object to control the FPS
     pygame.display.set_caption('Adventure of Sir Ikethor') # changes the caption of the pygame window
   
     self.level = Level() # create a level object
     
   def run(self):
     while True:
-      for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+      for event in pygame.event.get(): # get all the events that are happening in pygame
+        if event.type == pygame.QUIT: # if the user clicks the X button on the pygame window then quit the game
           pygame.quit()
           sys.exit()
 

@@ -8,7 +8,7 @@ class Player(pygame.sprite.Sprite): #! very important to inherit from pygame.spr
 
         self.rect = self.image.get_rect(topleft = position)
 
-        self.hitbox = self.rect.inflate(-30, -60) # changing the rect of player to give depth when traversing obstacles #! may need to change x to 0 for collision issue later on
+        self.hitbox = self.rect.inflate(-30, -60) # changing the rect of player to give depth when traversing obstacles #! may need to change x to 0 for collision issue later on OR if I get a new player model and animation from Fiverr 
 
         self.direction = pygame.math.Vector2(0, 0) # create a vector for the direction of the player, this is what we can influence with keystrokes to move the player
         

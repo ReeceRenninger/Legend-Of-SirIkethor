@@ -4,6 +4,10 @@
 
 - First attempt at making a game with pygame library.  
 
+## Collaborators
+
+- Ozzie Kirkby helped with game logic to make the player/camera offset be dynamic as the window changes. 
+
 ## Tools
 
 - background remover for images: [remove.bg](https://www.remove.bg/)
